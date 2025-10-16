@@ -52,8 +52,6 @@ namespace CharlieDobson_OffbrandPlagueInc_Programming1
             }
         }
         
-        
-
         static void VirusSpawn()
         {
             foreach((int x, int y)  in viruses)
@@ -65,19 +63,14 @@ namespace CharlieDobson_OffbrandPlagueInc_Programming1
 
         static void VirusMove()
         {
-            foreach((int x, int y) in viruses)
+            for(int i = 0; i < viruses.Count(); i++)
             {
+                double opp = chance.NextDouble();
 
-                Console.SetCursorPosition(y, x);
-                double spawn = chance.NextDouble();
-
-                if (spawn < 0.1)
+                if (opp < 0.1)
                 {
+                    Console.SetCursorPosition(viruses[i].Item2, viruses[i].Item1);
                     Console.Write("X");
-                }
-                else
-                {
-                    Console.Write("-");
                 }
 
                 int move = chance.Next(1, 5);
@@ -101,7 +94,29 @@ namespace CharlieDobson_OffbrandPlagueInc_Programming1
                     yAxis--;
                 }
 
-                
+                int axisX = xAxis + viruses[i].Item1;
+                int axisY = yAxis + viruses[i].Item2;
+
+                if (axisX > 0 && axisX < 7 && axisY > 0 && axisY < 12)
+                {
+                    if()
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        viruses[i] = (axisX, axisY);
+                    }
+                }
+                else
+                {
+                    return;
+                }
+
+                Console.SetCursorPosition(viruses[i].Item2, viruses[i].Item1);
+                Console.Write("X");
+
+
             }
         }
 
