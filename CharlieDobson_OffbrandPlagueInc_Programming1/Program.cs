@@ -24,19 +24,20 @@ namespace CharlieDobson_OffbrandPlagueInc_Programming1
 
         static Random chance = new Random();
 
+
         static void Main(string[] args)
         {
             Console.CursorVisible = false;
             PaintGround();
-            viruses.Add((0, 3));
-            viruses.Add((1, 5));
-            viruses.Add((2, 10));
+            viruses.Add((3, 0));
+            viruses.Add((5, 5));
+            viruses.Add((10, 2));
             VirusSpawn();
 
             while(true)
             {
-                VirusMove();
                 Thread.Sleep(1000);
+                VirusMove();
             }
         }
 
@@ -56,7 +57,7 @@ namespace CharlieDobson_OffbrandPlagueInc_Programming1
         {
             foreach((int x, int y)  in viruses)
             {
-                Console.SetCursorPosition(y, x);
+                Console.SetCursorPosition(x, y);
                 Console.Write("X");
             }
         }
@@ -69,9 +70,16 @@ namespace CharlieDobson_OffbrandPlagueInc_Programming1
 
                 if (opp < 0.1)
                 {
-                    Console.SetCursorPosition(viruses[i].Item2, viruses[i].Item1);
+                    viruses.Add((viruses[i].Item1, viruses[i].Item2));
+                    Console.SetCursorPosition(viruses[i].Item1, viruses[i].Item2);
                     Console.Write("X");
                 }
+                else
+                {
+                    Console.SetCursorPosition(viruses[i].Item1, viruses[i].Item2);
+                    Console.Write("-");
+                }
+                        
 
                 int move = chance.Next(1, 5);
                 int xAxis = 0;
@@ -96,10 +104,12 @@ namespace CharlieDobson_OffbrandPlagueInc_Programming1
 
                 int axisX = xAxis + viruses[i].Item1;
                 int axisY = yAxis + viruses[i].Item2;
+                
 
-                if (axisX > 0 && axisX < 7 && axisY > 0 && axisY < 12)
+                if (axisX > 0 && axisX < 12 && axisY > 0 && axisY < 7)
                 {
-                    if()
+                    
+                    if (ground[axisY, axisX] == "^" || ground[axisY, axisX] == "~" || ground[axisY, axisX] == "X")
                     {
                         return;
                     }
@@ -113,14 +123,10 @@ namespace CharlieDobson_OffbrandPlagueInc_Programming1
                     return;
                 }
 
-                Console.SetCursorPosition(viruses[i].Item2, viruses[i].Item1);
+                Console.SetCursorPosition(viruses[i].Item1, viruses[i].Item2);
                 Console.Write("X");
-
-
             }
         }
-
-
         
     }
 }
